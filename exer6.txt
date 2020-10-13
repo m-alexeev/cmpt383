@@ -1,0 +1,34 @@
+C++ Version: C++ 14
+
+
+source: https://en.wikibooks.org/wiki/C%2B%2B_Programming/Programming_Languages/Paradigms
+C++ Programming paradigms: C++ incorporates a mix of programming paradigms. It is considered to be a multi-paradigm language.
+    C++ supports procedural and object-oriented approaches. It also uses generic and functional programming concepts. 
+
+
+C++ is a compiled language, it uses the GCC compiler which is not only the most common 
+    but is also open source and supports Windows and Unix Operating systems.
+
+
+C++ is statically typed, meaning that once the type of a variable is set, it cannot be changed (this is checked at compile time). 
+    While it is true that variables can be cast to other types, the actual variable is not converted to the new type, but it is rather 
+    read in such a way as if it was the new type. 
+
+C++ supports both static and dynamic binding, dynamic bound variables are determined during runtime, while static ones are set at compile time.
+
+
+While there is speculation about the exact definition of strong/weakly typed languages, C++ is a strongly typed language. 
+    This is from the definition of C++ from Bjarne Stroustrup himself, the creator of C++. 
+
+
+While there are tools for garbage collection in C++, native C++ does not include them thus it has no garbage collection. The programmer
+    must manage all dynamically allocated memory themselves, if they choose to use any. 
+
+
+source: https://en.wikipedia.org/wiki/First-class_function
+C++ has support for first-class functions as well as closures. First-class functions should be used with care because of the lack of a garbage collector which may result in some memory leaks. 
+
+
+As with C, it is only natural that C++ has support for concurrent programming. There are built-in tools and functions that 
+    make parallel programming easier on the coder, but it is still not as easy as in languages like Haskell, and more complex 
+    parallelism will have to be implemented by hand 
