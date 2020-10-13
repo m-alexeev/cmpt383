@@ -1,5 +1,6 @@
-C++ Version: C++ 14
+Language Description #1
 
+C++ Version: C++ 17
 
 source: https://en.wikibooks.org/wiki/C%2B%2B_Programming/Programming_Languages/Paradigms
 C++ Programming paradigms: C++ incorporates a mix of programming paradigms. It is considered to be a multi-paradigm language.
@@ -32,3 +33,40 @@ C++ has support for first-class functions as well as closures. First-class funct
 As with C, it is only natural that C++ has support for concurrent programming. There are built-in tools and functions that 
     make parallel programming easier on the coder, but it is still not as easy as in languages like Haskell, and more complex 
     parallelism will have to be implemented by hand 
+
+
+
+Language Description #2
+
+
+Python Version 3.9.0 
+
+source: https://en.wikipedia.org/wiki/Python_(programming_language)
+Like C++ python supports multipule programming paradigms including structured, object-oriented, and functional programming.
+
+
+Python is not a compiled language unlike C++, it is interpreted at run time without pre-compiling instructions prior to running
+    The interpreter that is used is the Python interpreter which is the most common. 
+
+
+Python is dynamically typed since it is interpreted. Objects in python recieve a type at runtime unlike C++ where types are declared 
+    explicitely. Python is statically bound since all variables are bound directly to an object unlike in C++ where there is the choice
+    of creating a pointer to an object for dynamic binding. 
+
+
+Python is strongly typed, once a variable is set, the type of that variable will not change unless it is re-initialized.
+    For example, x = 5; x = "String" will not change the type of the variable x, but rather create a new variable x which is 
+    now of the String type and delete the old x variable. 
+
+
+Python has an embedded garbage collector which means that there is no need for manual memory management, and unlike C++ 
+    it is not possible to do manual memory management. 
+
+
+Python functions are first-class objects, which means they're assignable to variables, can be used as function arguments, etc.
+    Python also has support for closures which come in the form of nested fucntions which have access to free variables in the 
+    outer level scope. 
+
+
+Python has concurrency support but it is not as extensive as in C++. Python has a built in GIL (Global interpreter lock) which 
+    acts like a mutex in C/C++ preventing multiple threads from accessing it at the same time. 
