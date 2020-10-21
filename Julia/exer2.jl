@@ -10,15 +10,14 @@ function pythagTriples(num)
     return [(a,b,c) for a = 1:num, b = 1:num, c=1:num if a^2+b^2==c^2 && b>a]
 end 
 
+#TODO: Refactor 
 
 function join(separ, strings)
     ret = ""
-    for str in strings
-        if str != strings[end]
-            ret = ret * str * separ
-        else 
-            ret = ret * str
-        end
+    #If last item dont append the separator
+    arr = map((x) -> strings[end]==x ? x : x*separ  , strings)
+    for item in arr
+        ret *= item
     end
     return ret
 end
@@ -44,3 +43,4 @@ println(join("+", ["a"]))
 println(join("+", []))
 
 =# 
+
