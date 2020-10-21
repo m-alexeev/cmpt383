@@ -36,10 +36,26 @@ function mergeSort(lst)
 end
 
 
+# * Testing Merge
+println("Testing Merge")
+println(merge([3,4],[5,6]))
+println(merge([1],[2]))
+println(merge([1],[2,3]))
+println(merge([1],[]))
+println(merge([],[1]))
+println(merge([1,2],[]))
+println(merge([],[1,2]))
+
+println("================")
+
+# * Testing MergeSort 
+println("Testing MergeSort")
 println(mergeSort([8,3,2,6]))
-
-
-
+println(mergeSort([8,2,6,2]))
+println(mergeSort([8,2,6]))
+println(mergeSort([2,1]))
+println(mergeSort([1]))
+println(mergeSort([]))
 
 
 
