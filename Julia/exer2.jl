@@ -11,6 +11,19 @@ function pythagTriples(num)
 end 
 
 
+function join(separ, strings)
+    ret = ""
+    for str in strings
+        if str != strings[end]
+            ret = ret * str * separ
+        else 
+            ret = ret * str
+        end
+    end
+    return ret
+end
+
+
 #=
 # * Divisors Tests
 println(divisors(30))
@@ -20,7 +33,14 @@ println(divisors(127))
 # * Primes Tests
 println(primes(7))
 println(primes(100))
-=# 
 
+# * PythagTriples Tests
 println(pythagTriples(10))
 println(pythagTriples(30))
+ 
+# * Tests for join func 
+println(join("+", ["a","b","c"]))
+println(join("+", ["a"]))
+println(join("+", []))
+
+=# 
