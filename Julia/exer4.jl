@@ -1,13 +1,23 @@
 using Dates
 
+
+function divisors(num)
+    return [i for i = 2:num-1 if num%i==0] 
+end 
+ 
+
 function isFriday(date)
     return  (Dates.dayname(date) == "Friday") ? true : false
 end
 
 
+
+
 function isPrimeDay(date)
-    return (Dates.day(date) % 2 != 0) ? true : false 
+    day = Dates.day(date)
+    return (length(divisors(day)) == 0) ? true : false 
 end
+
 
 
  
