@@ -1,11 +1,7 @@
 using Dates
 
 function isFriday(date)
-    if (Dates.dayname(date) == "Friday")
-        return true
-    else
-        return false
-    end
+    return  (Dates.dayname(date) == "Friday") ? true : false
 end
 
 
