@@ -44,5 +44,3 @@ println(join("+", ["a"]))
 println(join("+", []))
 
 =# 
-println(join("+", ["a","b","a"]))
-
