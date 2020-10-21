@@ -35,7 +35,7 @@ rationalSumLowest x =  [ i % j | i <- [1..x-1] , let j = x - i,
 --       min = gcd z x == 1 && gcd z y == 1
 
 
-rationals :: [Ratio Integer]
+rationals :: [Ratio Int]
 rationals = concat(map rationalSumLowest [1..])
 
 
