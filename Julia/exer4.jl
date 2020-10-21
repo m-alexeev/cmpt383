@@ -1,9 +1,5 @@
 using Dates
-
-
-function divisors(num)
-    return [i for i = 2:num-1 if num%i==0] 
-end 
+include("exer2.jl")
  
 
 function isFriday(date)
