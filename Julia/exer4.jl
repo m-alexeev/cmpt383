@@ -7,8 +7,6 @@ function isFriday(date)
 end
 
 
-
-
 function isPrimeDay(date)
     day = Dates.day(date)
     return (length(divisors(day)) == 0) ? true : false 
