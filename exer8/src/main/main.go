@@ -10,6 +10,7 @@ func main(){
 	
 	fmt.Println(exer8.Hailstone(5))
 	fmt.Println(exer8.HailstoneSequenceAppend(5))
+	fmt.Println(exer8.HailstoneSequenceAllocate(5))
 
 
 }
