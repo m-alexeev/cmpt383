@@ -1,17 +1,24 @@
-using Base.Threads
+
+using Random
 function serialCalc(x, y)
     for i in 1:y
-        x += 1
+        x += rand((1,10))
     end
     return x
 end 
-
+using Base.Threads
 ##Multi threaded example, set number of threads to >1 to see results with "julia --threads 4"
 function parallelCalc(x,y)
-    @threads for i in 1:y
-        atomic_add!(x, UInt32(1))
+    #Do serial calc for small y
+    if (y <= 1000000)
+       return serialCalc(x,y)
+    #Otherwise split the process
+    else
+        half = Threads.@spawn (parallelCalc(0, y ÷ 2))
+        right = parallelCalc( 0, y ÷ 2 )
+        return fetch(half) + right
     end
-    return x[]
+   
 end
 
 
@@ -37,5 +44,5 @@ end
 
 
 #linearRegression("SampleData.csv")
-println(@time serialCalc(0, 100000000000))
-println(@time parallelCalc(Atomic{UInt32}(0), 100000000000))
+println(@time serialCalc(0, 10000000))
+println(@time parallelCalc(0, 10000000))
