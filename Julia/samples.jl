@@ -1,3 +1,46 @@
+##! Julia Weakness ##
+
+function ListComprehensionWeakness(num)
+    #Iterators cannot be reused in list comps in 
+    #Julia, this means more work on the CPU, and redundancy
+
+    #! Julia NON working example 
+    ## This will not compile because i cannot be reused in a since its not declared in scope of b
+    # array = [(a,b,c) for a in 1:num, b = a:num, c = 1:num if a^2+b^2==c^2]
+   
+    #! Working example
+    #Not good in terms of efficiency since it will loop throught all permutations 
+    #of a,b,c 
+    array = [(a,b,c) for a = 1:num, b = 1:num, c=1:num if a^2+b^2==c^2 && b>a]
+    #println("List Comp Pythag $(array)\n")
+   
+    ##! Working Python Example using List ListComprehensions
+    # array = [(a,b,c) for a in 1:num, b = a:num, c = 1:num if a^2+b^2==c^2]
+
+    return array
+end 
+
+function ListCompForLoop(num)
+    #Optimized example not using list Comps without extra iterations
+    # Runs much faster 
+    array = []
+    for a in 1:num
+        for b in a:num
+            for c in b:num
+                if a^2+b^2==c^2
+                    push!(array, (a,b,c))
+                end
+            end
+        end
+    end
+
+    return array
+
+end
+
+
+
+##! Common Julia Usages ##
 
 using Random
 function serialCalc(x, y)
@@ -82,10 +125,13 @@ function randomDistribution(nums, maxNum)
 end
 
 
+println(@time ListComprehensionWeakness(10))
+println(@time ListCompForLoop(10))
+
 println("Regression Line Calculation")
 linearRegression("SampleData.csv")
-println("\nComparing serial vs parallel Processing ")
-println("SET THE NUMBER OF THREADS > 1")
+println("\nComparing serial vs parallel Processing\n ")
+println("SET THE NUMBER OF THREADS > 1 OTHERWISE WOULD BE NO DIFFERENCE\n ")
 println(@time serialCalc(0, 100000000))
 println(@time parallelCalc(0, 100000000))
 
