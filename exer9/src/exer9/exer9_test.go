@@ -9,6 +9,16 @@ import (
 	"time"
 )
 
+
+func TestPoints(t *testing.T){
+	
+
+
+}
+
+
+
+
 func TestRandomArrays(t *testing.T) {
 	length := 1000
 	maxint := 100

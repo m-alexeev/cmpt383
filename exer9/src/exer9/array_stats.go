@@ -8,11 +8,11 @@ import(
 
 func RandomArray(length int, maxInt int) []int {
 	// TODO: create a new random generator with a decent seed; create an array with length values from 0 to values-1.
-	seed := rand.NewSource(time.Now().UnixNano())
-	newRand := rand.New(seed)
+	rand.Seed(time.Now().UnixNano() + int64(rand.Intn(100)))
+
 	a := make([]int, length)
 	for i := 0; i < length; i++{
-		a[i] = newRand.Intn(maxInt)
+		a[i] = rand.Intn(maxInt)
 	}
 	return a
 }
