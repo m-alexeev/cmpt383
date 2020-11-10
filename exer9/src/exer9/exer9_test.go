@@ -12,6 +12,7 @@ import (
 
 
 func TestPoints(t *testing.T){
+	//Testing Scale 
 	pt:= Point{1,2}
 	var sFactor float64 = 5
 	pt.Scale(sFactor)
@@ -19,6 +20,8 @@ func TestPoints(t *testing.T){
 	pt2 := Point{5,10}
 	assert.False(t, pt != pt2, "Points are not equal" )
 
+
+	//Testing Rotate
 	degree := math.Pi / 2
 	pt = Point{1,0}
 	pt.Rotate(degree)
@@ -34,6 +37,24 @@ func TestPoints(t *testing.T){
 
 }
 
+
+func TestStddev(t *testing.T){
+	arr := []int{1,2,3,4,5,6,7,8,9,10}
+
+	mean, stddev := MeanStddev(arr, 5)
+	mean1, stddev1 := MeanStddev(arr, 2)
+
+	tolerance:= 0.0001
+
+	diffStd := math.Abs(stddev - 2.872281323269 )
+	diffStd1 := math.Abs(stddev1 - 2.872281323269 )
+
+
+	assert.True(t, mean == 5.5, "Mean is not the same")
+	assert.True(t, mean1 == 5.5, "Mean is not the same")
+	assert.True(t, diffStd < tolerance, "Stddev is not within margin of error")
+	assert.True(t, diffStd1 < tolerance, "Stddev is not within margin of error")
+}
 
 
 
