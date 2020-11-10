@@ -7,12 +7,30 @@ import (
 	"sort"
 	"testing"
 	"time"
+	"math"
 )
 
 
 func TestPoints(t *testing.T){
-	
+	pt:= Point{1,2}
+	var sFactor float64 = 5
+	pt.Scale(sFactor)
 
+	pt2 := Point{5,10}
+	assert.False(t, pt != pt2, "Points are not equal" )
+
+	degree := math.Pi / 2
+	pt = Point{1,0}
+	pt.Rotate(degree)
+	pt2 = Point{0,1}
+
+	tolerance := 0.0001
+	diff_x := math.Abs(pt.X-pt2.X)
+	diff_y := math.Abs(pt.Y-pt2.Y)
+
+
+	assert.True(t, diff_x < tolerance, "Points are not equal" )
+	assert.True(t, diff_y < tolerance, "Points are not equal" )
 
 }
 
