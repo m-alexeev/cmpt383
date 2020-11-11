@@ -11,7 +11,8 @@ type Block struct {
 
 // Create new initial (generation 0) block, not setting the .Hash value.
 func Initial(difficulty uint8) Block {
-	// TODO
+	first := new(Block) 
+	
 }
 
 

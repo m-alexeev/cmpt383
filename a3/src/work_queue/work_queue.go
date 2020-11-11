@@ -13,6 +13,7 @@ type WorkQueue struct {
 func Create(nWorkers uint, maxJobs uint) *WorkQueue {
 	q := new(WorkQueue)
 	// TODO: initialize struct; start nWorkers workers as goroutines
+
 	return q
 }
 
@@ -26,8 +27,13 @@ func (queue WorkQueue) worker() {
 
 func (queue WorkQueue) Enqueue(work Worker) {
 	// TODO: put the work into the Jobs channel so a worker can find it and start the task.
+	queue.Jobs <- work
 }
 
 func (queue WorkQueue) Shutdown() {
 	// TODO: close .Jobs and remove all remaining jobs from the channel.
+	close(queue.Jobs)
+	for len(queue.Jobs) > 0{
+		<- queue.Jobs
+	}
 }
