@@ -33,7 +33,5 @@ func (queue WorkQueue) Enqueue(work Worker) {
 func (queue WorkQueue) Shutdown() {
 	// TODO: close .Jobs and remove all remaining jobs from the channel.
 	close(queue.Jobs)
-	for len(queue.Jobs) > 0{
-		<- queue.Jobs
-	}
+	for range queue.Jobs{}
 }
