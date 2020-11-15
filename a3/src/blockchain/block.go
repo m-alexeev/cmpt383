@@ -1,5 +1,10 @@
 package blockchain
 
+import(
+	"encoding/hex"
+)
+
+
 type Block struct {
 	PrevHash   []byte
 	Generation uint64
@@ -18,7 +23,9 @@ func Initial(difficulty uint8) Block {
 
 // Create new block to follow this block, with provided data, not setting the .Hash value.
 func (prev_block Block) Next(data string) Block {
-	// TODO
+	// * Create new Block 
+	newBlock := Block(prev_block.PrevHash, prev_block.Generation + 1, prev_block.Difficulty, data) 
+	return newBlock 
 }
 
 // String that we hash for this block.
@@ -28,7 +35,7 @@ func (blk Block) hashString() string {
 
 // String that we hash for this block, if we had blk.Proof == proof.
 func (blk Block) hashStringProof(proof uint64) string {
-	// TODO
+
 }
 
 // Calculate hash as if blk.Proof == proof.
