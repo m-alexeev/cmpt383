@@ -19,7 +19,6 @@ func Create(nWorkers uint, maxJobs uint) *WorkQueue {
 	for i := uint(0); i < nWorkers; i ++ {
 		go q.worker()
 	}
-	
 
 	return q
 }
@@ -31,6 +30,13 @@ func (queue WorkQueue) worker() {
 		// * run tasks by calling .Run(),
 		// * send the return value back on Results channel.
 		// * Exit (return) when .Jobs is closed.
+	for {
+		task := <- queue.Jobs
+		queue.Results <- task.Run()
+		if len(queue.Jobs) == 0 {
+			return
+		}
+	}
 }
 
 func (queue WorkQueue) Enqueue(work Worker) {
