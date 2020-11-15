@@ -41,7 +41,7 @@ func (prev_block Block) Next(data string) Block {
 }
 
 // String that we hash for this block.
-func (blk Block) HashString() string {
+func (blk Block) hashString() string {
 	return blk.hashStringProof(blk.Proof)
 }
 
