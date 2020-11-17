@@ -84,6 +84,11 @@ func (blk Block) validHashProof(proof uint64) bool {
 	nBytes := blk.Difficulty / 8
 	nBits := blk.Difficulty % 8
 	hash := blk.Hash
+
+	if len(hash) == 0{
+		return false 
+	}
+
 	for i := uint8(8); i < nBytes ; i ++{
 		if hash[len(hash) - int(i)- 1] != '\x00'{
 			validHash = false
@@ -91,7 +96,7 @@ func (blk Block) validHashProof(proof uint64) bool {
 			break
 		}
 	}
-	if hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
+	if  hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
 		fmt.Println(hash[len(hash) - int(nBytes) - 2] % (1<< nBits))
 		fmt.Println("not 1<<nBits")
 		validHash = false
