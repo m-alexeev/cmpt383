@@ -64,10 +64,10 @@ func (blk Block) hashStringProof(proof uint64) string {
 // modifying the Block.
 func (blk Block) calcHashProof(proof uint64) []byte {
 	// TODO
-	hash32 := sha256.Sum256(blk.PrevHash)
+	hash32 := sha256.Sum256([]byte(blk.hashString()))
 	hash := hash32[:]
 	for i := uint8(0) ; i < blk.Difficulty / 8; i++{
-		hash[len(hash) - int(i)- 1] = 0
+		hash[len(hash) - int(i)- 1] = '\x00'
 	}
 	return hash
 }
@@ -91,7 +91,7 @@ func (blk Block) validHashProof(proof uint64) bool {
 			break
 		}
 	}
-	if hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
+	if hash[len(hash) - 2] % (1<< nBits) != 0{
 		fmt.Println(hash[len(hash) - int(nBytes) - 2] % (1<< nBits))
 		fmt.Println("not 1<<nBits")
 		validHash = false
