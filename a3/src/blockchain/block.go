@@ -4,7 +4,8 @@ import(
 	"encoding/hex"
 	"strconv"
 	"bytes"
-
+	"crypto/sha256"
+	"fmt"
 )
 
 
@@ -63,7 +64,12 @@ func (blk Block) hashStringProof(proof uint64) string {
 // modifying the Block.
 func (blk Block) calcHashProof(proof uint64) []byte {
 	// TODO
-	return []byte("0")
+	hash32 := sha256.Sum256(blk.PrevHash)
+	hash := hash32[:]
+	for i := uint8(0) ; i < blk.Difficulty / 8; i++{
+		hash[len(hash) - int(i)- 1] = 0
+	}
+	return hash
 }
 
 // Calculate the block's hash.
@@ -74,7 +80,24 @@ func (blk Block) CalcHash() []byte {
 // Would this hash end in enough null bits, if blk.Proof == proof?
 func (blk Block) validHashProof(proof uint64) bool {
 	// TODO
-	return false
+	validHash := true
+	nBytes := blk.Difficulty / 8
+	nBits := blk.Difficulty % 8
+	hash := blk.Hash
+	for i := uint8(8); i < nBytes ; i ++{
+		if hash[len(hash) - int(i)- 1] != '\x00'{
+			validHash = false
+			fmt.Println("not \x00")
+			break
+		}
+	}
+	if hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
+		fmt.Println(hash[len(hash) - int(nBytes) - 2] % (1<< nBits))
+		fmt.Println("not 1<<nBits")
+		validHash = false
+	}
+
+	return validHash
 }
 
 // Is this block's hash valid?
