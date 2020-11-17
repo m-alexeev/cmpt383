@@ -91,7 +91,7 @@ func (blk Block) validHashProof(proof uint64) bool {
 			break
 		}
 	}
-	if hash[len(hash) - 2] % (1<< nBits) != 0{
+	if hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
 		fmt.Println(hash[len(hash) - int(nBytes) - 2] % (1<< nBits))
 		fmt.Println("not 1<<nBits")
 		validHash = false
