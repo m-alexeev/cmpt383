@@ -44,7 +44,7 @@ func InsertionSort(arr []float64) {
 
 }
 
-const insertionSortCutoff = 5
+const insertionSortCutoff = 1100
 
 func QuickSort(arr []float64) {
 	// TODO: implement Quicksort:
