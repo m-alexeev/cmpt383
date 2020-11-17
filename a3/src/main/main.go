@@ -2,7 +2,7 @@ package main
 
 import(
 	"../blockchain"
-	"encoding/hex"
+	// "encoding/hex"
 
 	"fmt"
 )
@@ -10,16 +10,14 @@ import(
 
 func main(){
 	b0 := blockchain.Initial(19)
-	b0.CalcHash()
-	// b0.SetProof(56231)
-
+	b0.SetProof(87745)
+	b1 := b0.Next("hash example 1234")
+	b1.SetProof(1407891)
 	fmt.Println(b0.ValidHash())
-
-	// b1 := b0.Next("hash example 1234")
-	// b1.SetProof(346082)
-	// fmt.Println(b1.ValidHash())
+	fmt.Println(b1.ValidHash())
 
 
-	fmt.Println(hex.EncodeToString(b0.CalcHash()))
+	//fmt.Println(hex.EncodeToString(b0.CalcHash()))
+
 }
 

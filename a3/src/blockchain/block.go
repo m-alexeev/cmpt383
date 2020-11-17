@@ -20,7 +20,6 @@ type Block struct {
 
 // Create new initial (generation 0) block, not setting the .Hash value.
 func Initial(difficulty uint8) Block {
-
 	first := Block{}
 	first.PrevHash = bytes.Repeat([]byte("\x00"), 32)
 	first.Generation = 0
@@ -56,6 +55,7 @@ func (blk Block) hashStringProof(proof uint64) string {
 					strconv.Itoa(int(blk.Difficulty)) + ":" + 
 					blk.Data + ":" + 
 					strconv.FormatUint(blk.Proof, 10)
+	
 	return retString
 }
 
@@ -66,9 +66,9 @@ func (blk Block) calcHashProof(proof uint64) []byte {
 	// TODO
 	hash32 := sha256.Sum256([]byte(blk.hashString()))
 	hash := hash32[:]
-	for i := uint8(0) ; i < blk.Difficulty / 8; i++{
-		hash[len(hash) - int(i)- 1] = '\x00'
-	}
+	// for i := uint8(0) ; i < blk.Difficulty / 8; i++{
+	// 	hash[len(hash) - int(i)- 1] = '\x00'
+	// }
 	return hash
 }
 
@@ -96,8 +96,8 @@ func (blk Block) validHashProof(proof uint64) bool {
 			break
 		}
 	}
-	if  hash[len(hash) - int(nBytes) - 2] % (1<< nBits) != 0{
-		fmt.Println(hash[len(hash) - int(nBytes) - 2] % (1<< nBits))
+	if  hash[len(hash) - int(nBytes) - 1] % (1<< nBits) != 0{
+		fmt.Println(hash[len(hash) - int(nBytes) - 1] % (1<< nBits))
 		fmt.Println("not 1<<nBits")
 		validHash = false
 	}
