@@ -1,6 +1,5 @@
 package exer10
 
-import ("testing")
 
 func FibSerial(n uint) uint{
 	if n == 0{
@@ -47,15 +46,6 @@ func Fib(n uint, cutoff uint ) uint{
 }
 
 
-
-
-func BenchmarkFibConc10(b *testing.B){Fib(10,10)}
-func BenchmarkFibConc15(b *testing.B){Fib(10,15)}
-func BenchmarkFibConc20(b *testing.B){Fib(10,20)}
-func BenchmarkFibConc25(b *testing.B){Fib(10,25)}
-func BenchmarkFibSerial(b *testing.B){FibSerial(10)}
-
-
 func Fibbonaci(n uint) uint{
-	return Fib(n, 15)
+	return Fib(n, 22)
 }
