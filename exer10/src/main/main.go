@@ -8,7 +8,7 @@ import (
 
 func main(){
 
-	n := uint(10)
-	fmt.Println(exer10.Fibbonaci(n))
-	
+	for i:=uint(0); i <30 ; i ++{
+		fmt.Println(exer10.Fibbonaci(i))
+	}
 }
