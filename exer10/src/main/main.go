@@ -21,4 +21,6 @@ func main(){
 	tri := exer10.Triangle{A:exer10.Point{X:1,Y:2}, B:exer10.Point{X:-3,Y:4}, C:exer10.Point{X:5,Y:-6}}
 	exer10.TurnDouble(&tri, math.Pi)
 	fmt.Println(tri.String())
+
+	exer10.DrawCircle(40,20,"output.png")
 }
