@@ -28,5 +28,5 @@ func (chain Blockchain) IsValid() bool {
 	// 		return false // not enough trailing nulls
 	// 	}
 	// }
-	return true
+	// return true
 }
