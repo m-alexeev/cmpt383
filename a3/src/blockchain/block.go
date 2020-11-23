@@ -66,9 +66,6 @@ func (blk Block) calcHashProof(proof uint64) []byte {
 	// TODO
 	hash32 := sha256.Sum256([]byte(blk.hashString()))
 	hash := hash32[:]
-	// for i := uint8(0) ; i < blk.Difficulty / 8; i++{
-	// 	hash[len(hash) - int(i)- 1] = '\x00'
-	// }
 	return hash
 }
 

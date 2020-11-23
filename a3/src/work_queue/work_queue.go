@@ -19,7 +19,6 @@ func Create(nWorkers uint, maxJobs uint) *WorkQueue {
 	for i := uint(0); i < nWorkers; i ++ {
 		go q.worker()
 	}
-
 	return q
 }
 

@@ -46,14 +46,22 @@ type MiningResult struct {
 //*  "workers" chunks concurrently in a work queue. Should return shortly after a result is found.
 func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint64) MiningResult {
 	// TODO
-	vals := (end - start)/ chunks
-	minChan := make(chan MiningResult, workers)
-	miniRes := MiningResult{}
-	for i := uint64(0); i < workers; i ++ {
-		//? mine (i * vals) , (i+1) * vals  
-		break  
+	chunkSize := ((end + 1) - start)/ chunks
+	if chunkSize == 0{
+		chunkSize = 1
 	}
-	return miniRes
+	mininRes := MiningResult{}
+	queue := work_queue.Create(uint(workers),uint(chunkSize))
+	for i := uint64(0); i < workers; i ++ {
+		worker:= miningWorker{blk, i*chunkSize, (i+1)*chunkSize}
+		queue.Enqueue(worker)
+	}
+	for i:=uint64(0); i < workers; i ++{
+		
+		
+	}
+
+	return mininRes
 }
 
 //TODO Call .MineRange with some reasonable values that will probably find a result.
