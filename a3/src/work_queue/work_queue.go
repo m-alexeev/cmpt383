@@ -1,5 +1,7 @@
 package work_queue
 
+// import("fmt")
+
 type Worker interface {
 	Run() interface{}
 }

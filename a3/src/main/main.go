@@ -2,21 +2,19 @@ package main
 
 import(
 	"../blockchain"
-	// "encoding/hex"
+	"encoding/hex"
 
 	"fmt"
 )
 
 
 func main(){
-	b0 := blockchain.Initial(19)
-	b0.SetProof(87745)
-	b1 := b0.Next("hash example 1234")
-	b1.SetProof(1407891)
-	fmt.Println(b0.ValidHash())
-	fmt.Println(b1.ValidHash())
-
-
+	b0 := blockchain.Initial(7)
+	b0.Mine(1)
+	fmt.Println(b0.Proof, hex.EncodeToString(b0.Hash))
+	// b1 := b0.Next("this is an interesting message")
+	// b1.Mine(1)
+	// fmt.Println(b1.Proof, hex.EncodeToString(b1.Hash))
 	//fmt.Println(hex.EncodeToString(b0.CalcHash()))
 
 }
