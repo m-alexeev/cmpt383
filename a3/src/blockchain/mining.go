@@ -25,9 +25,8 @@ type miningWorker struct {
 func (task miningWorker) Run() interface{} {
 	// TODO
 	res := new(MiningResult)
-	for proof := task.start; proof < task.end; proof++{
+	for proof := task.start; proof <= task.end; proof++{
 		if task.blk.validHashProof(proof){
-			task.blk.SetProof(proof)
 			res.Proof = proof
 			res.Found = true
 			return *res 
@@ -50,20 +49,19 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 	if chunkSize == 0{
 		chunkSize = 1
 	}
-
-	queue := work_queue.Create(uint(chunks),uint(chunkSize))
+	queue := work_queue.Create(uint(workers),uint(chunks))
 	for i := uint64(0); i < chunks; i ++ {
-		newEnd := (i+1) * chunkSize
-		if newEnd > end{
-			newEnd = end
+		mx := (i+1) * chunkSize
+		if mx > end{
+			mx = end
 		}
-		worker:= miningWorker{blk, i*chunkSize, newEnd}
+		worker:= miningWorker{blk, i*chunkSize, mx}
 		queue.Enqueue(worker)
 	}
 	for i:=uint64(0); i < chunks; i ++{
 		mr := <-queue.Results
 		res := mr.(MiningResult)
-		if res.Found{
+		if res.Found == true{
 			queue.Shutdown()
 			return res
 		}

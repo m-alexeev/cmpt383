@@ -31,12 +31,9 @@ func (queue WorkQueue) worker() {
 		// * run tasks by calling .Run(),
 		// * send the return value back on Results channel.
 		// * Exit (return) when .Jobs is closed.
-	for {
+	for range queue.Jobs{
 		task := <- queue.Jobs
 		queue.Results <- task.Run()
-		if len(queue.Jobs) == 0 {
-			return
-		}
 	}
 }
 
