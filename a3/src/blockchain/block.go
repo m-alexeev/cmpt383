@@ -5,7 +5,6 @@ import(
 	"strconv"
 	"bytes"
 	"crypto/sha256"
-	"fmt"
 )
 
 
@@ -88,9 +87,6 @@ func (blk Block) validHashProof(proof uint64) bool {
 		if hash[len(hash) - int(i)- 1] != '\x00'{
 			validHash = false
 			break
-		}else{
-
-			fmt.Println(hex.EncodeToString(hash))
 		}
 	}
 	if  hash[len(hash) - int(nBytes) - 1] % (1<< nBits) != 0{
