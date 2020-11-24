@@ -63,7 +63,7 @@ func (blk Block) hashStringProof(proof uint64) string {
 // modifying the Block.
 func (blk Block) calcHashProof(proof uint64) []byte {
 	// TODO
-	hash32 := sha256.Sum256([]byte(blk.hashString()))
+	hash32 := sha256.Sum256([]byte(blk.hashStringProof(proof)))
 	hash := hash32[:]
 	return hash
 }
