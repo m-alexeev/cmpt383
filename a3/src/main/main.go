@@ -18,5 +18,6 @@ func main(){
 	b2 := b1.Next("this is not interesting")
 	b2.Mine(1)
 	fmt.Println(b2.Proof, hex.EncodeToString(b2.Hash))
+
 }
 

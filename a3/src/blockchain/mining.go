@@ -25,7 +25,7 @@ type miningWorker struct {
 func (task miningWorker) Run() interface{} {
 	// TODO
 	res := new(MiningResult)
-	for proof := task.start; proof<= task.end; proof++{
+	for proof := task.start; proof < task.end; proof++{
 		if task.blk.validHashProof(proof){
 			task.blk.SetProof(proof)
 			res.Proof = proof

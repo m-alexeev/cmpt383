@@ -11,7 +11,7 @@ type Blockchain struct {
 func (chain *Blockchain) Add(blk Block) {
 	// You can remove the panic() here if you wish.
 	if !blk.ValidHash() {
-		// panic("adding block with invalid hash")
+		panic("adding block with invalid hash")
 	}
 	// TODO
 }
