@@ -7,7 +7,7 @@ import (
 //* Mine in a very simple way: check sequentically until a valid hash is found.
 //* This doesn't *need* to be used in any way, but could be used to do some mining
 //* before your .Mine is complete. Results should be the same as .Mine (but slower).
-func (blk *Block) mineSequential() {
+func (blk *Block) MineSequential() {
 	proof := uint64(0)
 	for !blk.validHashProof(proof) {
 		proof += 1

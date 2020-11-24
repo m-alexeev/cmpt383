@@ -5,7 +5,7 @@ import(
 	"strconv"
 	"bytes"
 	"crypto/sha256"
-	"fmt"
+	// "fmt"
 )
 
 
@@ -74,10 +74,11 @@ func (blk Block) CalcHash() []byte {
 	return blk.calcHashProof(blk.Proof)
 }
 
+
+
 // Would this hash end in enough null bits, if blk.Proof == proof?
 func (blk Block) validHashProof(proof uint64) bool {
 	// TODO
-	validHash := true
 	nBytes := blk.Difficulty / 8
 	nBits := blk.Difficulty % 8
 	hash := blk.calcHashProof(proof)
@@ -85,18 +86,17 @@ func (blk Block) validHashProof(proof uint64) bool {
 		return false 
 	}
 	for i := uint8(0); i < nBytes ; i ++{
-		if hash[len(hash) - int(i)- 1] != '\x00'{
-			validHash = false
-			break
+		if hash[len(hash) - int(i)-1] != '\x00' {
+			return false
 		}
 	}
-	if  hash[len(hash) - int(nBytes) - 1] % (1<< nBits) != 0{
-		validHash = false
+
+	if  hash[len(hash) - int(nBytes) - 1 ] % (1<< nBits) != 0{
+		return false
 	}
-	if validHash == true{
-		fmt.Println(hex.EncodeToString( hash))
-	}
-	return validHash
+	// fmt.Println(hex.EncodeToString( hash))
+	 
+	return true
 }
 
 // Is this block's hash valid?
