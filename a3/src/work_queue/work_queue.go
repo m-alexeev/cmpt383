@@ -31,9 +31,12 @@ func (queue WorkQueue) worker() {
 		// * run tasks by calling .Run(),
 		// * send the return value back on Results channel.
 		// * Exit (return) when .Jobs is closed.
-	for range queue.Jobs{
-		task := <- queue.Jobs
+	for elem  := range queue.Jobs{
+		task := elem
 		queue.Results <- task.Run()
+		// if len(queue.Jobs) == 0 {
+		// 	return
+		// }
 	}
 }
 
@@ -45,5 +48,7 @@ func (queue WorkQueue) Enqueue(work Worker) {
 func (queue WorkQueue) Shutdown() {
 	// * close .Jobs and remove all remaining jobs from the channel.
 	close(queue.Jobs)
-	for range queue.Jobs{}
+	for range queue.Jobs{
+		<-queue.Jobs
+	}
 }

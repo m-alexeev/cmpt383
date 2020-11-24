@@ -55,6 +55,7 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 		if mx > end{
 			mx = end
 		}
+
 		worker:= miningWorker{blk, i*chunkSize, mx}
 		queue.Enqueue(worker)
 	}
@@ -66,8 +67,8 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 			return res
 		}
 	}
-
-	return MiningResult{}
+	queue.Shutdown()
+	return MiningResult{Found:false}
 }
 
 //TODO Call .MineRange with some reasonable values that will probably find a result.

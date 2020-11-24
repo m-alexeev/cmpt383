@@ -94,8 +94,6 @@ func (blk Block) validHashProof(proof uint64) bool {
 	if  hash[len(hash) - int(nBytes) - 1 ] % (1<< nBits) != 0{
 		return false
 	}
-
-	
 	return true
 }
 
