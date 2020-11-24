@@ -54,7 +54,7 @@ func (blk Block) hashStringProof(proof uint64) string {
 					strconv.FormatUint(blk.Generation,10) + ":" + 
 					strconv.Itoa(int(blk.Difficulty)) + ":" + 
 					blk.Data + ":" + 
-					strconv.FormatUint(blk.Proof, 10)
+					strconv.FormatUint(proof, 10)
 	
 	return retString
 }
@@ -80,22 +80,20 @@ func (blk Block) validHashProof(proof uint64) bool {
 	validHash := true
 	nBytes := blk.Difficulty / 8
 	nBits := blk.Difficulty % 8
-	hash := blk.Hash
-
+	hash := blk.calcHashProof(proof)
 	if len(hash) == 0{
 		return false 
 	}
-
 	for i := uint8(8); i < nBytes ; i ++{
 		if hash[len(hash) - int(i)- 1] != '\x00'{
 			validHash = false
-			fmt.Println("not \x00")
 			break
+		}else{
+
+			fmt.Println(hex.EncodeToString(hash))
 		}
 	}
 	if  hash[len(hash) - int(nBytes) - 1] % (1<< nBits) != 0{
-		fmt.Println(hash[len(hash) - int(nBytes) - 1] % (1<< nBits))
-		fmt.Println("not 1<<nBits")
 		validHash = false
 	}
 

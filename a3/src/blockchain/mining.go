@@ -1,8 +1,8 @@
 package blockchain
 
 import (
-	"../work_queue"
 	"fmt"
+	"../work_queue"
 )
 
 //* Mine in a very simple way: check sequentically until a valid hash is found.
@@ -26,11 +26,10 @@ type miningWorker struct {
 func (task miningWorker) Run() interface{} {
 	// TODO
 	res := new(MiningResult)
-	for i := task.start; i < task.end; i++{
-		if task.blk.validHashProof(i){
-			fmt.Println("found")
-			task.blk.SetProof(i)
-			res.Proof = i
+	for proof := task.start; proof<= task.end; proof++{
+		if task.blk.validHashProof(proof){
+			task.blk.SetProof(proof)
+			res.Proof = proof
 			res.Found = true
 			return res 
 		}
@@ -58,12 +57,14 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 		worker:= miningWorker{blk, i*chunkSize, (i+1)*chunkSize}
 		queue.Enqueue(worker)
 	}
+	
 	mr := new(MiningResult)
 	for i:=uint64(0); i < chunks; i ++{
 		mr := <-queue.Results
 		res := mr.(MiningResult)
-		if res.Found == true{
-			fmt.Println(res)
+		if res.Found{
+			fmt.Println("found")
+			queue.Shutdown()
 		}
 	}
 
