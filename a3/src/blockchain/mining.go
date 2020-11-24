@@ -31,7 +31,7 @@ func (task miningWorker) Run() interface{} {
 			task.blk.SetProof(proof)
 			res.Proof = proof
 			res.Found = true
-			return res 
+			return *res 
 		}
 	}
 	res.Found = false 
@@ -57,18 +57,17 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 		worker:= miningWorker{blk, i*chunkSize, (i+1)*chunkSize}
 		queue.Enqueue(worker)
 	}
-	
-	mr := new(MiningResult)
 	for i:=uint64(0); i < chunks; i ++{
 		mr := <-queue.Results
 		res := mr.(MiningResult)
 		if res.Found{
 			fmt.Println("found")
 			queue.Shutdown()
+			return res
 		}
 	}
 
-	return *mr
+	return MiningResult{}
 }
 
 //TODO Call .MineRange with some reasonable values that will probably find a result.
