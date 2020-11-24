@@ -1,7 +1,6 @@
 package blockchain
 
 import (
-	"fmt"
 	"../work_queue"
 )
 
@@ -54,14 +53,17 @@ func (blk Block) MineRange(start uint64, end uint64, workers uint64, chunks uint
 
 	queue := work_queue.Create(uint(chunks),uint(chunkSize))
 	for i := uint64(0); i < chunks; i ++ {
-		worker:= miningWorker{blk, i*chunkSize, (i+1)*chunkSize}
+		newEnd := (i+1) * chunkSize
+		if newEnd > end{
+			newEnd = end
+		}
+		worker:= miningWorker{blk, i*chunkSize, newEnd}
 		queue.Enqueue(worker)
 	}
 	for i:=uint64(0); i < chunks; i ++{
 		mr := <-queue.Results
 		res := mr.(MiningResult)
 		if res.Found{
-			fmt.Println("found")
 			queue.Shutdown()
 			return res
 		}
