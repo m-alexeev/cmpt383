@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-int square(int i){
-    return i*i;
-}
+
 
 
 void printList(const char** list, int length){
