@@ -38,7 +38,9 @@ func main(){
 	// 	}
 	// }
 
-	b0 := blockchain.Initial(7)
+
+
+	b0 := blockchain.Initial(20)
 	b0.Mine(1)
 	fmt.Println(b0.Proof, hex.EncodeToString(b0.Hash))
 	b1 := b0.Next("this is an interesting message")

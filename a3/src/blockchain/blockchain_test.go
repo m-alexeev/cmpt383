@@ -3,6 +3,7 @@ package blockchain
 import (
 	// "github.com/stretchr/testify/assert"
 	"testing"
+	"time"
 )
 
 func TestSimpleMining(t *testing.T){
@@ -16,7 +17,6 @@ func TestSimpleMining(t *testing.T){
 
 	b2s := b1s.Next("Another Hash")
 	b2s.MineSequential()
-
 
 	//Create 3 Blocks to mine Concurrently
 	b0c := Initial(5)
@@ -49,5 +49,46 @@ func TestSimpleMining(t *testing.T){
 	}
 
 }
+
+func TestMiningComplex(t *testing.T){
+
+}
+
+
+func TestMiningSpeed(t *testing.T){
+
+	marginErr := 1.15
+
+	b0s := Initial(20)
+	seqStart := time.Now()
+	b0s.MineSequential()
+	seqEnd := time.Now()
+	targetTime := float64(seqEnd.Sub(seqStart))
+
+	
+	b0c := Initial(20)	
+	concStart := time.Now()
+	b0c.Mine(1)
+	concEnd := time.Now()
+	timeTaken := float64(concEnd.Sub(concStart))
+
+	
+	if timeTaken > targetTime * marginErr {
+		t.Error("1 Worker concurrent mining is taking too long")
+	}
+
+	b1c := b0c.Next("Some Hash")
+	concStart = time.Now()
+	b1c.Mine(4)
+	concEnd = time.Now()
+	timeTaken = float64(concEnd.Sub(concStart))
+
+	if timeTaken > targetTime { 
+		t.Error ("Concurrent mining is slower than sequential")
+	}
+
+
+}
+
 
 // TODO: some useful tests of Blocks
